@@ -36,7 +36,7 @@ const RegistrationPage = () => {
                     <form className="form form-login">
                         <div className="row">
                             <div className="input-field col s12">
-                            <input type="text"
+                            <input type="email"
                                    name="email"
                                    className="validate"
                                    onChange={changeHandler}
@@ -53,9 +53,11 @@ const RegistrationPage = () => {
                             <label htmlFor="password">Password</label>
                             </div>
                         </div>
+                        <div className='text'>Your password needs to be at least 6 characters long</div>
                         <div className="row">
                             <button className='wawes-effect waves-light btn blue'
-                                    onClick={registerHandler}>
+                                    onClick={registerHandler}
+                                    >
                                 Registration
                             </button>
 

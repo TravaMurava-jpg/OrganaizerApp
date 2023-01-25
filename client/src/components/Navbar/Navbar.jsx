@@ -14,8 +14,13 @@ const Navbar = () => {
       {
         isLogin
         ? <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <li><a href="/dashboard">Personal Tasks</a></li>
+          <li><a href="/sharedtasks">Group Tasks</a></li>
+          <li><a href="/groups">My groups</a></li>
+          <li><a href="/allgroups">All groups</a></li>
           <li><a href="/" onClick={logout}>Logout</a></li>
           </ul>
+          
           :
           <ul id="nav-mobile" className="right hide-on-med-and-down">
         <li><a href="/">Login</a></li>

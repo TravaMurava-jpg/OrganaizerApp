@@ -7,6 +7,9 @@ const app = express()
 app.use(express.json({extended: true}))
 app.use('/api/auth', require('../server/routes/auth.route'))
 app.use('/api/todo', require('../server/routes/todo.route'))
+app.use('/api/group', require('../server/routes/group.route'))
+app.use('/api/groups', require('../server/routes/groups.route'))
+app.use('/api/sharedtodo', require('../server/routes/sharedtodo.route'))
 
 
 

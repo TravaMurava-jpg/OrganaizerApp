@@ -98,6 +98,7 @@ const MainPage = () => {
     }, [getTodo])
 
     return(
+        
         <div className='container'>
             <div className='main-page'>
                 <h4>Add task</h4>

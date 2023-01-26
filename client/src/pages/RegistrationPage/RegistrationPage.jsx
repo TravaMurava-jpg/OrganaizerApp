@@ -19,7 +19,14 @@ const RegistrationPage = () => {
                     'Content-Type' : 'application/json'
                 }
             })
-            .then(response => console.log(response))
+            .then(response => {
+                if(response.status===201){
+                alert('Registration succesful!');
+                } 
+                else{
+                    alert('something seems to be not working, check if your email is already registered')
+                }
+            })
         } catch (error) {
             console.log(error)
         }

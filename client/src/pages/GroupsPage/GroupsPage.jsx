@@ -57,7 +57,7 @@ const GroupsPage = () => {
         } catch (error) {
             console.log(error)
         }
-    }, [getGroup])
+    }, [getGroup, userId])
 
 
 

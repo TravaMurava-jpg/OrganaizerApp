@@ -13,14 +13,15 @@ const SharedTasks = () => {
     const [text, setText] = useState('')
     const {userId} = useContext(AuthContext)
     const [groupId, setGroupId] = useState('')
+    const [isChoosed, setIsChoosed] = useState(false)
     
     
     const onOptionChangeHandler = (event) => {
         setCurrentGroup(event.target.value)
+        setIsChoosed(true)
         groups.map((group) => {
             if(group.groupName === currentGroup){
                 setGroupId(group._id)
-                console.log(currentGroup)
             }
         })
     }
@@ -120,7 +121,7 @@ const SharedTasks = () => {
     useEffect(() => {
         getGroup()
         getTodo()
-    }, [getTodo])
+    }, [getTodo, getGroup])
 
     return(
         <div className='container'>
@@ -141,7 +142,7 @@ const SharedTasks = () => {
 
             
             </div>
-                <h3>Group tasks</h3>
+            {isChoosed ? (<div><h3>Group tasks</h3>
                 <div className="todos">
                     {
                         sharedTasks.map((todo, index) => {
@@ -189,12 +190,11 @@ const SharedTasks = () => {
                     </div>
                 </form>
             </div>    
-                  </div>
-            </div>
-            
-        </div>
-    )
+             </div>
+            </div>):("")}
+               </div>
+               </div>
 
-}
+)}
 
 export default SharedTasks

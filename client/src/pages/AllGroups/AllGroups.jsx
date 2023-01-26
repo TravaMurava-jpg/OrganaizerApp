@@ -3,13 +3,14 @@ import './AllGroups.scss'
 import axios from 'axios'
 import { useEffect, useContext} from 'react'
 import { AuthContext } from '../../context/AuthContext'
+import { useCallback } from 'react'
 
 const AllGroups = () => {
 
     const [groups, setGroups] = useState([])
     const {userId} = useContext(AuthContext)
 
-const getGroups = async () =>{
+const getGroups = useCallback( async () =>{
     try {
         await axios.get('api/groups', {
             headers: {
@@ -21,7 +22,7 @@ const getGroups = async () =>{
     } catch (error) {
         console.log(error)
     }
-}
+},[userId])
 
 const applyGroup = async(id) => {
     try {
@@ -41,7 +42,7 @@ const applyGroup = async(id) => {
 
 useEffect(() => {
     getGroups()
-}, [])
+}, [getGroups])
 
 
 return(
@@ -55,7 +56,7 @@ return(
                         let cls = ["col todos-text"]
                         var isInGroup = false
                         groups.users.forEach(function(item){
-                            if(item.userId == userId){
+                            if(item.userId === userId){
                                 isInGroup = !isInGroup
                             }
                         })

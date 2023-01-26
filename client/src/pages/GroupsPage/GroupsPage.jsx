@@ -41,14 +41,16 @@ const GroupsPage = () => {
     }, [groupName, userId, getGroup, groups])
 
 
-    {/* for now, removeGroups is deleting the whole group, while i want to delete specific user's id,
-        not sure which method should i use in backend, its written in the slack*/}
     const removeGroups = useCallback(async (id) =>{
         try {
             console.log(id)
-            await axios.delete(`/api/group/delete/${id}`, {id}, {
+            await axios.delete(`/api/group/delete/${id}`, {
                 headers: {
                     'Content-Type': 'application/json'
+                },
+                data:{
+                    id: id,
+                    userId: userId
                 }
             })
             .then(() => getGroup())
@@ -76,7 +78,7 @@ const GroupsPage = () => {
                                 <div className="col todos-num">{index+1}</div>
                                 <div className="col todos-text">{groups.groupName}</div>
                                 <div className="col todos-buttons"></div>
-                                <i className="material-icons red-text" onClick={() => removeGroups(userId)}>delete</i>
+                                <i className="material-icons red-text" onClick={() => removeGroups(groups._id)}>delete</i>
                     </div>
                         )}
                         )}

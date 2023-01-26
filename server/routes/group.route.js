@@ -4,12 +4,12 @@ const Group = require('../models/Group')
 
 router.post('/add', async (req,res) => {
     try {
-        console.log(req.body)
+     
         const {groupName, userId} = req.body
 
         const group = new Group({
             groupName : groupName,
-            users : [userId]
+            users: {userId: userId}
         })
 
         await group.save()
@@ -25,10 +25,7 @@ router.post('/add', async (req,res) => {
 router.get('/', async (req,res) => {
     try {
         const {userId} = req.query
-        console.log(userId)
-
-        const group = await Group.find({ users: userId})
-
+        const group = await Group.find({"users.userId": userId})
         res.json(group)
     } catch (error) {
         console.log(error)
@@ -37,8 +34,10 @@ router.get('/', async (req,res) => {
 
 router.delete('/delete/:id', async (req,res) => {
     try {
-        console.log(req.params.id)
-        const group = await Group.findOneAndDelete({users: req.params.id})
+        const {id, userId} = req.body
+        const filter = {_id: id, "users.userId" : userId}
+        const group = await Group.findOneAndUpdate(filter, {$set: {"users.$.userId": null}})
+        console.log(group)
         res.json(group)
     } catch (error) {
         console.log(error)

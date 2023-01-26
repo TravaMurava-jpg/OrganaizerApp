@@ -64,10 +64,7 @@ async (req, res) => {
             return res.status(400).json({message: 'User with this email does not exist'})
         }
 
-        console.log(user.password)
-        console.log(password)
         const isMatch = await bcrypt.compare(password, user.password)
-        console.log(isMatch)
 
         if(!isMatch){
             return res.status(400).json({message: 'Incorrect password'})

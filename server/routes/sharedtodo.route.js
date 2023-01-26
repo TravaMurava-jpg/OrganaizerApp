@@ -4,10 +4,7 @@ const Todo = require('../models/SharedTodo')
 
 router.post('/add', async (req,res) => {
     try {
-        console.log(req.body)
         const {text, userId} = req.body
-        console.log(userId)
-        console.log(text)
 
         const todo = new Todo({
             text,
@@ -28,7 +25,9 @@ router.post('/add', async (req,res) => {
 
 router.get('/', async (req,res) => {
     try {
-        const {userId} = req.query
+        const userId = req.query.groupId
+        console.log(req.query)
+        console.log(userId)
 
         const todo = await Todo.find({ owner: userId})
 

@@ -1,7 +1,8 @@
-import React, {useState, useCallback} from 'react'
+import React, {useState, useCallback, useContext} from 'react'
 import './SharedTasks.scss'
 import axios from 'axios'
 import { useEffect } from 'react'
+import { AuthContext } from '../../context/AuthContext'
 
 const SharedTasks = () => {
 
@@ -10,15 +11,19 @@ const SharedTasks = () => {
     const [sharedTasks, setSharedTasks] = useState([])
     const [currentGroup, setCurrentGroup] = useState('')
     const [text, setText] = useState('')
-    const {userId} = 'something'
-{/* const {userId} = currentGroup._id */ }
-{/* this shoule be the case actually */}
+    const {userId} = useContext(AuthContext)
+    const [groupId, setGroupId] = useState('')
+    
+    
     const onOptionChangeHandler = (event) => {
         setCurrentGroup(event.target.value)
+        groups.map((group) => {
+            if(group.groupName === currentGroup){
+                setGroupId(group._id)
+                console.log(currentGroup)
+            }
+        })
     }
-
-    {/* here we using the exact same logic for creating and modifying TODOS, but this time, our userId 
-        with wich we will be using for searching, creating the todos is actually an a groupId*/}
 
     const getGroup = useCallback(async () =>{
         try {
@@ -40,19 +45,19 @@ const SharedTasks = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                params: {userId}
+                params: {groupId}
             })
             .then((response) => setSharedTasks(response.data))
         } catch (error) {
             console.log(error)
         }
-    }, [userId])
+    }, [groupId])
 
 
     const createTodo = useCallback(async () => {
         if(!text) return null
         try {
-            await axios.post('api/sharedtodo/add', {text : text, userId: userId}, {
+            await axios.post('api/sharedtodo/add', {text : text, userId: groupId}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -65,7 +70,7 @@ const SharedTasks = () => {
         } catch (error) {
             console.log(error)
         }
-    }, [text, userId, sharedTasks, getTodo])
+    }, [text, groupId, sharedTasks, getTodo])
 
     const removeTodos = useCallback(async (id) =>{
         try {
@@ -114,7 +119,8 @@ const SharedTasks = () => {
 
     useEffect(() => {
         getGroup()
-    }, [getGroup])
+        getTodo()
+    }, [getTodo])
 
     return(
         <div className='container'>
@@ -124,21 +130,18 @@ const SharedTasks = () => {
             
                 <div className="todos">
                 <form>
-            <select onChange={onOptionChangeHandler}
-                    > 
-                    {/* here we need to set the default value for the selecter, otherwise the current group would be undefined
-                    userId declaration will try to destruct currentGroup._id, which is impossible due to its being undefined*/}   
-                    {/* for whatever reason, selecter is still not rendering*/} 
-
-                                                
+            <select className="browser-default"
+                    onChange={onOptionChangeHandler}
+                    >
+                        <option value=''>Select one...</option>                      
             { groups.map((groups, index) => {
-            return(<option key={index}>{groups.groupName}</option>)}) }
+            return(<option key={index+1} value={groups.groupName}>{groups.groupName}</option>)}) }
             </select>
             </form>
 
-            {/* the above code should work only in case selecter is working !!!!!!!!!!!!!!!!!
+            
             </div>
-                <h3>Your tasks</h3>
+                <h3>Group tasks</h3>
                 <div className="todos">
                     {
                         sharedTasks.map((todo, index) => {
@@ -185,9 +188,8 @@ const SharedTasks = () => {
                                 >Add task</button>
                     </div>
                 </form>
-            </div>
-                            */}
-                            </div>
+            </div>    
+                  </div>
             </div>
             
         </div>

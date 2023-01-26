@@ -5,11 +5,15 @@ import axios from 'axios'
 import './AuthPage.scss'
 import { AuthContext } from '../../context/AuthContext'
 
+
+
 const AuthPage = () => {
     const [form, setForm]  = useState({
         email: '',
         password: ''
     })
+
+    const [isOk, setIsOk] = useState(true)
 
     const { login } = useContext(AuthContext)
 
@@ -29,6 +33,7 @@ const AuthPage = () => {
             })
         } catch (error) {
             console.log(error)
+            setIsOk(false)
         }
     }
 
@@ -62,6 +67,7 @@ const AuthPage = () => {
                             </div>
                         </div>
                         <div className="row">
+                            {!isOk ? (<div className='red-text'>Email or password doesn't exist</div>):('')}
                             <button className='wawes-effect waves-light btn blue'
                                     onClick={loginHandler}
                             >

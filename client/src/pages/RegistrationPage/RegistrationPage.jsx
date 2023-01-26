@@ -23,12 +23,10 @@ const RegistrationPage = () => {
                 if(response.status===201){
                 alert('Registration succesful!');
                 } 
-                else{
-                    alert('something seems to be not working, check if your email is already registered')
-                }
             })
         } catch (error) {
             console.log(error)
+            alert('Something seems to be wrong, try to check your email/password and if you are already registered')
         }
     }
 

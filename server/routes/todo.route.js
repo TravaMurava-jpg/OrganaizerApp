@@ -4,10 +4,7 @@ const Todo = require('../models/Todo')
 
 router.post('/add', async (req,res) => {
     try {
-        console.log(req.body)
         const {text, userId} = req.body
-        console.log(userId)
-        console.log(text)
 
         const todo = new Todo({
             text,

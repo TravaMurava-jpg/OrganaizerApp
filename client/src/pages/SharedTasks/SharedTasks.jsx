@@ -19,6 +19,7 @@ const SharedTasks = () => {
     const onOptionChangeHandler = (event) => {
         setCurrentGroup(event.target.value)
         setIsChoosed(true)
+        console.log(event.target.value)
         groups.map((group) => {
             if(group.groupName === currentGroup){
                 setGroupId(group._id)

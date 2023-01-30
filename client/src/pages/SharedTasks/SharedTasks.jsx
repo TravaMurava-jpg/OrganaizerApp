@@ -21,7 +21,7 @@ const SharedTasks = () => {
         setIsChoosed(true)
         console.log(event.target.value)
         groups.map((group) => {
-            if(group.groupName === currentGroup){
+            if(group.groupName === event.target.value){
                 setGroupId(group._id)
             }
         })

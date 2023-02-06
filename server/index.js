@@ -2,6 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 mongoose.set('strictQuery', true);
 
+const path = require('path');
+
 const app = express()
 
 app.use(express.json({extended: true}))
@@ -10,7 +12,11 @@ app.use('/api/todo', require('../server/routes/todo.route'))
 app.use('/api/group', require('../server/routes/group.route'))
 app.use('/api/groups', require('../server/routes/groups.route'))
 app.use('/api/sharedtodo', require('../server/routes/sharedtodo.route'))
-
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, '../client/build')));
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
 
 
 

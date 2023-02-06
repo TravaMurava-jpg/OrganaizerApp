@@ -21,6 +21,7 @@ export const useRoutes = (isLogin) => {
 
     return(
         <Routes>
+            <Route path='/' element={<Navigate to="/dashboard" replace />} />
             <Route path='/login' element={<Navigate to="/dashboard" replace />} />
             <Route path='/dashboard' element={<MainPage/>} />
             <Route path='/groups' element={<GroupsPage/>} />

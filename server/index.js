@@ -23,4 +23,7 @@ async function connecting(){
     }
     }
     connecting()
-    app.listen(4000, () => console.log(`listening on port 4000`))
+    var PORT = process.env.PORT || 4000
+    app.listen(PORT, function() {
+        console.log(`Server is running on port ${PORT}!`)
+    })

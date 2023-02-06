@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./index.js --ignore client",
-    "server": "nodemon index.js --ignore client"
+    "server": "nodemon index.js --ignore client",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently -k \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",

@@ -16,4 +16,4 @@ To run the server you should use:
 
 The following app was written using React.Js, Express (framefork for server), Materialize (css framework), axios for requests.
 
-* notice that the current structure already have node_modules installed, if you using Windows/Linux, you should audit the packages that are compatible with your device
+* notice that the current structure already have node_modules installed, if you using Windows/Linux, you should audit the packages that will be compatible with your device

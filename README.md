@@ -11,7 +11,7 @@ To run the client you should use:
       
 To run the server you should use:
 
-        npm i && nodemon      
+      npm i && nodemon      
 
 
 The following app was written using React.Js, Express (framefork for server), Materialize (css framework), axios for requests.

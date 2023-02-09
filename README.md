@@ -4,7 +4,16 @@ This App allows you to create TODO tasks, sharing them within a group of users, 
 
 To run it properly, you need to launch a client and a server seperatly.
 
-- use npm start to run client application
-- use nodemon to run server
+To run the client you should use:
+
+      npm i && npm start
+      
+      
+To run the server you should use:
+
+      npm i && nodemon      
+
 
 The following app was written using React.Js, Express (framefork for server), Materialize (css framework), axios for requests.
+
+* notice that the current structure already have node_modules installed, if you using Windows/Linux, you should audit the packages that will be compatible with your device
